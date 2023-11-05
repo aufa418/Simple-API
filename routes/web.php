@@ -11,13 +11,13 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-
-$router->get("/products", "ApiController@index");
-$router->get("/products/{id}", "ApiController@show");
-$router->post("/products/create", "ApiController@store");
-$router->post("/products/update/{id}", "ApiController@update");
-$router->delete("/products/delete/{id}", "ApiController@destroy");
-
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+$router->group(["prefix" => "products"], function () use ($router) {
+    $router->get("/", "ApiController@index");
+    $router->get("/{id}", "ApiController@show");
+    $router->post("/create", "ApiController@store");
+    $router->post("/update/{id}", "ApiController@update");
+    $router->delete("/delete/{id}", "ApiController@destroy");
+});
+$router->get('/', function () {
+    return view("index");
 });

@@ -24,9 +24,9 @@ class ApiController extends Controller
             ]
         );
         $data = new Api();
-        $data->name = $request->name;
-        $data->stock = $request->stock;
-        $data->price = $request->price;
+        $data->name = $request->input('name');
+        $data->stock = $request->input('stock');
+        $data->price = $request->input('price');
         $data->save();
 
         return response()->json($data);
@@ -46,7 +46,7 @@ class ApiController extends Controller
             "price" => "Required"
         ];
         $this->validate($request, $rules);
-        $data = new Api();
+        $data = Api::find($id);
         $data->name = $request->name;
         $data->stock = $request->stock;
         $data->price = $request->price;
