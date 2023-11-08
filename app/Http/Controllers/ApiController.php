@@ -33,7 +33,7 @@ class ApiController extends Controller
         if ($validate->fails()) {
             return response()->json([
                 "status" => "Failed",
-                "message" => $validate->errors()->first()
+                "message" => $validate->errors()->all()
             ], 404);
         } else {
             $data = new Api();
